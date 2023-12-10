@@ -2,8 +2,11 @@ from flask import Flask
 from flask import render_template
 from flask import request
 import sqlite3
+from flask_ngrok import run_with_ngrok
 
 app = Flask(__name__)
+
+run_with_ngrok(app)
 
 # Home Page route
 @app.route("/")
@@ -123,3 +126,6 @@ def delete():
             con.close()
             # Send the transaction message to result.html
             return render_template('result.html',msg=msg)
+        
+if __name__ == '__main__':
+    app.run()
