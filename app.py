@@ -10,26 +10,20 @@ app = Flask(__name__)
 def home():
     return render_template("home.html")
 
-# Route to form used to add a new student to the database
-@app.route("/enternew")
-def enternew():
-    return render_template("student.html")
 
-# Route to add a new record (INSERT) student data to the database
+# Route to add a new record (INSERT) to the database
 @app.route("/addrec", methods = ['POST', 'GET'])
 def addrec():
     # Data will be available from POST submitted by the form
     if request.method == 'POST':
         try:
             nm = request.form['nm']
-            addr = request.form['add']
-            city = request.form['city']
-            zip = request.form['zip']
+            resy = request.form['resy']
 
             # Connect to SQLite3 database and execute the INSERT
             with sqlite3.connect('database.db') as con:
                 cur = con.cursor()
-                cur.execute("INSERT INTO students (name, addr, city, zip) VALUES (?,?,?,?)",(nm, addr, city, zip))
+                cur.execute("INSERT INTO applicants (name, resy) VALUES (?,?)",(nm, resy))
 
                 con.commit()
                 msg = "Record successfully added to database"
@@ -46,12 +40,12 @@ def addrec():
 @app.route('/list')
 def list():
     # Connect to the SQLite3 datatabase and 
-    # SELECT rowid and all Rows from the students table.
+    # SELECT rowid and all Rows from the table.
     con = sqlite3.connect("database.db")
     con.row_factory = sqlite3.Row
 
     cur = con.cursor()
-    cur.execute("SELECT rowid, * FROM students")
+    cur.execute("SELECT rowid, * FROM applicants")
 
     rows = cur.fetchall()
     con.close()
@@ -70,7 +64,7 @@ def edit():
             con.row_factory = sqlite3.Row
 
             cur = con.cursor()
-            cur.execute("SELECT rowid, * FROM students WHERE rowid = " + id)
+            cur.execute("SELECT rowid, * FROM applicants WHERE rowid = " + id)
 
             rows = cur.fetchall()
         except:
@@ -89,20 +83,18 @@ def editrec():
             # Use the hidden input value of id from the form to get the rowid
             rowid = request.form['rowid']
             nm = request.form['nm']
-            addr = request.form['add']
-            city = request.form['city']
-            zip = request.form['zip']
+            resy = request.form['resy']
 
             # UPDATE a specific record in the database based on the rowid
             with sqlite3.connect('database.db') as con:
                 cur = con.cursor()
-                cur.execute("UPDATE students SET name='"+nm+"', addr='"+addr+"', city='"+city+"', zip='"+zip+"' WHERE rowid="+rowid)
+                cur.execute("UPDATE applicants SET name='"+nm+"', resy='"+resy+"' WHERE rowid="+rowid)
 
                 con.commit()
                 msg = "Record successfully edited in the database"
         except:
             con.rollback()
-            msg = "Error in the Edit: UPDATE students SET name="+nm+", addr="+addr+", city="+city+", zip="+zip+" WHERE rowid="+rowid
+            msg = "Error in the Edit: UPDATE applicants SET name="+nm+", resy="+resy+" WHERE rowid="+rowid
 
         finally:
             con.close()
@@ -119,7 +111,7 @@ def delete():
             # Connect to the database and DELETE a specific record based on rowid
             with sqlite3.connect('database.db') as con:
                     cur = con.cursor()
-                    cur.execute("DELETE FROM students WHERE rowid="+rowid)
+                    cur.execute("DELETE FROM applicants WHERE rowid="+rowid)
 
                     con.commit()
                     msg = "Record successfully deleted from the database"
