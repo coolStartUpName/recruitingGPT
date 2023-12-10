@@ -22,7 +22,7 @@ def addrec():
          city = request.form['city']
          pin = request.form['pin']
          
-         with sql.connect("student_database.db") as con:
+         with sql.connect("database.db") as con:
             cur = con.cursor()
             cur.execute("INSERT INTO students (name,addr,city,pin) VALUES (?,?,?,?)",(name,addr,city,pin) )
             con.commit()
@@ -37,7 +37,7 @@ def addrec():
 
 @app.route('/list')
 def list():
-   con = sql.connect("student_database.db")
+   con = sql.connect("database.db")
    con.row_factory = sql.Row
    
    cur = con.cursor()
