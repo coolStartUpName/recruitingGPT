@@ -1,4 +1,19 @@
 from flask import Flask, render_template, request
+from flask_sqlalchemy import SQLAlchemy
+db = SQLAlchemy()
+engine = db.create_engine("sqlite:///applicants.sqlite")
+
+conn = engine.connect() 
+metadata = db.MetaData()
+
+Applicants = db.Table('Applicants', metadata,
+              db.Column('Id', db.Integer(),primary_key=True),
+              db.Column('Name', db.String(255), nullable=False),
+              db.Column('Resume', db.String(10000), nullable=False),
+              db.Column('Email', db.String(255), nullable=False)
+              )
+
+metadata.create_all(engine) 
 
 app = Flask(__name__)
 
