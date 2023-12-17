@@ -2,69 +2,21 @@
 {% block title %}Job Description{% endblock %}
 
 {% block content%}
-<h1>Job Posting: Software Engineer (Python)</h1>
-
-    <section>
-        <h2>Company Overview:</h2>
-        <p>[Your Company Name] is a dynamic and innovative technology company committed to [brief description of your company and its mission]. We are currently seeking a talented and motivated Software Engineer to join our growing team.</p>
-    </section>
-
-    <section>
-        <h2>Position: Software Engineer</h2>
-
-        <h3>Responsibilities:</h3>
-        <ul>
-            <li>Design, develop, and maintain high-quality software solutions using Python.</li>
-            <li>Collaborate with cross-functional teams to define, design, and deliver new features and enhancements.</li>
-            <li>Write clean, efficient, and maintainable code.</li>
-            <li>Participate in code reviews to ensure code quality and share knowledge with the team.</li>
-            <li>Contribute to the architecture, design, and implementation of our software products.</li>
-            <li>Stay updated on industry trends and best practices to ensure continuous improvement.</li>
-        </ul>
-
-        <h3>Qualifications:</h3>
-        <ul>
-            <li>Bachelor's degree in Computer Science, Software Engineering, or a related field.</li>
-            <li>Proven experience as a Software Engineer with expertise in Python development.</li>
-            <li>Strong understanding of software development principles and best practices.</li>
-            <li>Experience with web application development using modern frameworks (e.g., Django, Flask).</li>
-            <li>Familiarity with front-end technologies (HTML, CSS, JavaScript) is a plus.</li>
-            <li>Knowledge of database systems (SQL and NoSQL databases).</li>
-            <li>Excellent problem-solving and debugging skills.</li>
-            <li>Strong communication and collaboration skills.</li>
-            <li>Ability to thrive in a fast-paced and dynamic environment.</li>
-        </ul>
-
-        <h3>Benefits:</h3>
-        <ul>
-            <li>Competitive salary and performance-based bonuses.</li>
-            <li>Health, dental, and vision insurance.</li>
-            <li>401(k) retirement plan.</li>
-            <li>Flexible work hours and remote work options.</li>
-            <li>Professional development opportunities.</li>
-        </ul>
-    </section>
-
-    <section>
-        <h3>How to Apply:</h3>
-        <p>Interested candidates are invited to submit their resume and cover letter to [your-email@example.com]. Please include "Software Engineer (Python)" in the subject line. In your cover letter, briefly describe your relevant experience and why you are a great fit for this position.</p>
-
-        <p>[Your Company Name] is an equal opportunity employer. We encourage candidates from all backgrounds to apply.</p>
-
-        <p><em>Note: This job description is intended to convey information essential to understanding the scope of the job and the general nature and level of work performed by job holders within this job. However, it is not intended to be an exhaustive list of qualifications, skills, efforts, duties, responsibilities, or working conditions associated with the position.</em></p>
-    </section>
-
-    <hr>
-
-    <h2>Upload Your Resume</h2>
+    <h2>See how smart you are</h2>
 
     <div style="text-align: center;">
-        <form action="#" style="display: inline-block; text-align: left;">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="nm" required>
+        <form method="POST">
+            <!-- <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email:</label>
+            <input type='email' id="email" name="email" required> -->
 
             <label for="resume">Resume:</label>
-            <textarea id="resume" name="resy" rows="6" required></textarea>
+            <input id="resume" name="resume" rows="6" required>
+
+            <label for="resume">Job Posting:</label>
+            <input id="resume" name="jobDescription" rows="6" required>
 
             <input type="submit" value="Submit Resume">
         </form>

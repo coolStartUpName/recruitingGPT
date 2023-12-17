@@ -1,4 +1,5 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, request
+from website import db
 from .models import Applicants
 
 views = Blueprint('views', __name__)
@@ -10,15 +11,19 @@ def index():
 @views.route("/jobDescription", methods=['GET', 'POST'])
 def job_description():
     if request.method == 'POST':
-        resume = request.from.get('resume')
-        return render_template('applicants.html')
+        resume = request.form.get('resume')
+        job_description = request.form.get('jobDescription')
+        applicant = Applicants(resume=resume, job_description=job_description)
+        db.session.add(applicant)
+        db.session.commit()
+
+        return render_template('applicants.html', resume=resume, jd=job_description)
     else:
         return render_template('jobDescription.html')
 
 @views.route("/applicants")
 def applicants():
-    all_applicants = conn.execute("SELECT * FROM Applicants")
-    return render_template('applicants.html', applicant=all_applicants)
+    return render_template('applicants.html')
 
 
 # new_user = User(email=email, first_name=first_name, password=generate_password_hash(password1, method='pbkdf2:sha256'))
