@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request
 from website import db
 from .models import Applicants
+from .gpt import gptTest
 
 views = Blueprint('views', __name__)
 
@@ -16,7 +17,7 @@ def job_description():
         applicant = Applicants(resume=resume, job_description=job_description)
         db.session.add(applicant)
         db.session.commit()
-
+        gptTest()
         return render_template('applicants.html', resume=resume, jd=job_description)
     else:
         return render_template('jobDescription.html')
