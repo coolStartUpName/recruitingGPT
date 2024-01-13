@@ -3,6 +3,31 @@
 
 {% block content%}
 <h1>This is the applicants page</h1>
-<h1>{{ resume }}</h1>
+<!-- <h1>{{ resume }}</h1>
 <h1>{{ jd }}</h1>
+<h1>{{ resume_embedding }}</h1>
+<h1>{{ distance }}</h1> 
+<h1>{{ applicants[0]['distance'] }}</h1> -->
+<div class="container mt-5">
+    <h2>Applicants List</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Resume</th>
+                <th>Distance</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for applicant in applicants %}
+                <tr>
+                    <td>{{ applicant.id }}</td>
+                    <td>{{ applicant.resume }}</td>
+                    <td>{{ applicant.distance }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
 {%endblock%}
