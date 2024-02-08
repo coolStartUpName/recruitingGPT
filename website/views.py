@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, request
 from website import db
 from .models import Applicants
 from .gpt import gptTest
-from .job_embedding import job_embedding
+#from .job_embedding import job_embedding
 from scipy.spatial.distance import euclidean
 
 views = Blueprint('views', __name__)
@@ -15,13 +15,14 @@ def index():
 def job_description():
     if request.method == 'POST':
         resume = request.form.get('resume')
-        # job_description = request.form.get('jobDescription')
+        jobDescription = request.form.get('jobDescription')
+        job_embedding = gptTest(jobDescription)
         resume_embedding = gptTest(resume)
-        distance = euclidean(resume_embedding, job_embedding)
+        distance = euclidean(job_embedding, resume_embedding)
         string_distance = str(distance)
+        string_job_embedding = str(job_embedding)
         string_resume_embedding = str(resume_embedding)
-        # job_embedding = gptTest(job_embedding)
-        applicant = Applicants(resume=resume, resume_embedding=string_resume_embedding, distance=string_distance)
+        applicant = Applicants(resume=resume, resume_embedding=string_resume_embedding, jobDescription=jobDescription, job_description_embedding=string_job_embedding, distance=string_distance)
         db.session.add(applicant)
         db.session.commit()
         applicants_data = Applicants.query.all()
