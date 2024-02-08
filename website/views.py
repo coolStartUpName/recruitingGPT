@@ -22,7 +22,13 @@ def job_description():
         string_distance = str(distance)
         string_job_embedding = str(job_embedding)
         string_resume_embedding = str(resume_embedding)
-        applicant = Applicants(resume=resume, resume_embedding=string_resume_embedding, jobDescription=jobDescription, job_description_embedding=string_job_embedding, distance=string_distance)
+        applicant = Applicants(
+            resume=resume,
+            resume_embedding=string_resume_embedding,
+            jobDescription=jobDescription,
+            job_description_embedding=string_job_embedding,
+            distance=string_distance
+        )
         db.session.add(applicant)
         db.session.commit()
         applicants_data = Applicants.query.all()
@@ -36,7 +42,3 @@ def applicants():
 
     return render_template('applicants.html', applicants=applicants_data)
 
-
-# new_user = User(email=email, first_name=first_name, password=generate_password_hash(password1, method='pbkdf2:sha256'))
-# db.session.add(new_user)
-# db.session.commit()
