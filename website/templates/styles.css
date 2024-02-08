@@ -1,0 +1,18 @@
+/* styles.css */
+
+body {
+    background-color: #2b8dee; /* Light gray background */
+    color: #212529; /* Dark text color */
+}
+
+.navbar {
+    background-color: #007bff; /* Navbar background color */
+}
+
+.navbar-brand, .navbar-nav .nav-link {
+    color: #3d59c0 !important; /* Navbar text color */
+}
+
+.container {
+    margin-top: 20px; /* Add margin to the top of the content container */
+}

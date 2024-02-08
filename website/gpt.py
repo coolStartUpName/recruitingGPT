@@ -1,10 +1,10 @@
 from openai import OpenAI
 client = OpenAI()
 
-def gptTest(resume):
+def gptTest(text):
     response = client.embeddings.create(
-        input=resume,
-        model="text-embedding-ada-002"
+        input=text,
+        model="text-embedding-3-large"
     )
 
     return(response.data[0].embedding)
